@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 
 
 //db nsql connection
+
 const url = 'mongodb+srv://priyankumar:H3br30s1782!@yizuslabs-dc-jupiter-9ajdw.mongodb.net/inventory?retryWrites=true&w=majority'
 // Connect to Mongoose and set connection variable
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true});
