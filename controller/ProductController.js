@@ -2,8 +2,8 @@
 Product = require('../models/Product');// Handle index actions
 
 // Handle index actions
-exports.index = function (req, res) {
-    Product.get(function (err, products) {
+exports.index = async function (req, res) {
+    const doc=await Product.get(function (err, products) {
         if (err) {
             res.json({
                 status: "error",
@@ -19,7 +19,7 @@ exports.index = function (req, res) {
 };
 
 // Handle create contact actions
-exports.new = function (req, res) {
+exports.new = async function (req, res) {
     var product = new Product();
     product.ProductID=req.body.ProductID ? req.body.ProductID : product.ProductID;  
     product.TypeCode=req.body.TypeCode;
@@ -32,7 +32,7 @@ exports.new = function (req, res) {
     product.CurrencyCode=req.body.CurrencyCode;
     product.Price=req.body.Price
 // save the contact and check for errors
-    product.save(function (err) {
+    const doc= await product.save(function (err) {
         if (err) res.json(err);
         else
             res.json({
