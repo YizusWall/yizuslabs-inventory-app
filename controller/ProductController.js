@@ -40,7 +40,7 @@ exports.new = async function (req, res) {
                 data: product
             });
     });
-};
+}
 
 // Handle view product info
 exports.view =  function (req, res) {
