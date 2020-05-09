@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 //const url = 'mongodb+srv://priyankumar:H3br30s1782!@yizuslabs-dc-jupiter-9ajdw.mongodb.net/inventory?retryWrites=true&w=majority'
 // Connect to Mongoose and set connection variable
-mongoose.connect(process.env.DB_URL_MONGODB, { useNewUrlParser: true}).then(
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true}).then(
     client=>{
 
         var db = mongoose.connection;
