@@ -1,30 +1,36 @@
  //font: https://medium.com/@dinyangetoh/how-to-build-simple-restful-api-with-nodejs-expressjs-and-mongodb-99348012925d
 // Import express
-let express = require('express');
+const express = require('express');
 // Import Body parser
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 // Import Mongoose
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 //import local variables
 require('dotenv').config({path:'variables.env'})
 // Initialize the app
-let app = express();
-
-// Import routes
-let apiRoutes = require("./api-rest");
+const app = express();
 // Configure bodyparser to handle post requests
+// Import routes
+const apiRoutes = require("./api-rest");
+  //place body parser before CRUD handles
+app.use(bodyParser.urlencoded({extended:true}))
+	//read JSON Data 
+  app.use(bodyParser.json())
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
+//server setup
+const uri = 'mongodb+srv://'+process.env.DB_HOST;
+console.info('uri '+uri);
+const options = {
+  user: process.env.DB_USER,
+  pass: process.env.DB_PASS,
+  dbName: process.env.DB_NAME,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+};
 
-
-//db nsql connection
-
-//const url = 'mongodb+srv://priyankumar:H3br30s1782!@yizuslabs-dc-jupiter-9ajdw.mongodb.net/inventory?retryWrites=true&w=majority'
-// Connect to Mongoose and set connection variable
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true}).then(
+mongoose.connect(uri, options).then(
     client=>{
 
         var db = mongoose.connection;
@@ -34,11 +40,7 @@ if(!db)
 else
     console.log("Db connected successfully")
 
-//express request handlers
-    //place body parser before CRUD handles
-    app.use(bodyParser.urlencoded({extended:true}))
-	//read JSON Data 
-    app.use(bodyParser.json())
+
     // Send message for default URL
     app.get('/', (req, res) => res.send('Service Ecommerce'));
 
