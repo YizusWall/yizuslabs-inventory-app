@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 //server setup
 const uri = 'mongodb+srv://'+process.env.DB_HOST;
-console.info('uri '+uri);
+
 const options = {
   user: process.env.DB_USER,
   pass: process.env.DB_PASS,
@@ -47,10 +47,9 @@ else
     // Use Api routes in the App
     app.use('/api', apiRoutes);
     //the browser must to listen the server connection
-    var host=process.env.SV_HOST|| '0.0.0.0';
-    var port=process.env.PORT||9090;
+    const port=process.env.PORT||9090;
 
-	app.listen(port,host, function(){
+	app.listen(port, function(){
         console.log('listening in 9090 port')
         })
 
