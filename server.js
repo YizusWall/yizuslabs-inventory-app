@@ -47,7 +47,7 @@ else
     // Use Api routes in the App
     app.use('/api', apiRoutes);
     //the browser must to listen the server connection
-    var host=process.env.HOST|| '0.0.0.0';
+    var host=process.env.SV_HOST|| '0.0.0.0';
     var port=process.env.PORT||9090;
 
 	app.listen(port,host, function(){
